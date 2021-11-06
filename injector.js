@@ -22,7 +22,25 @@ if(mode == "sp") {
 	this[O5p[7][1570]][O5p[7][477]](2 * this[O5p[7][1511]],0xcccccc,0.5);
 }
 else {
-	this[O5p[7][1570]][O5p[7][477]](2 * this[O5p[7][1511]],0x000000,1);
+	let color;
+	switch(O5p[0][0][O5p[7][41]][this[O5p[7][1105]]].team) {
+		case 2:
+			color = 0xff0000;
+			break;
+			case 3:
+			color = 0x0000ff;
+			break;
+			case 4:
+			color = 0x00ff00;
+			break;
+			case 5:
+			color = 0xffff00;
+			break;
+		default:
+			color = 0x000000;
+			break;
+	}
+	this[O5p[7][1570]][O5p[7][477]](2 * this[O5p[7][1511]],color,1);
 }
 `;
 
@@ -49,7 +67,7 @@ if(j6V.mo == "dsp") {
 	}
 
 	for (let player of O7R[0][0].discs) {
-		if(player == O7R[0][0].discs[O7R[956]] || player == undefined) continue;
+		if(player == O7R[0][0].discs[O7R[956]] || player == undefined || (player.team > 1 && player.team == O7R[0][0].discs[O7R[956]].team )) continue;
 		if(distToSegmentSquared(player, 1, O7R[0][0].discs[O7R[956]], O7R[294])) {
 			O7R[5][O7R[0][0].discs.indexOf(player)].diedThisStep = 1;	
 		}
