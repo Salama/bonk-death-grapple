@@ -1,10 +1,10 @@
 {
 	"manifest_version": 2,
-	"name": "Bonk Death Grapple",
-	"version": "0.3",
+	"name": "",
+	"version": "",
 	"author": "Salama, (Salamana_)",
 
-	"description": "Adds a new mode called Death Grapple",
+	"description": "",
 
 	"permissions": [
 		"webRequest",
