@@ -1,28 +1,11 @@
 function DGInjector(str){
-	newStr = str;
-	newStr=newStr.replace('[S9L.C1E(107),S9L.W1E(1130),S9L.C1E(1131),S9L.W1E(1132),',DEATH_GRAPPLE_MODE);
-	newStr=newStr.replace('O7R[5][O7R[956]][O7R[8][288]]=O7R[72][O7R[8][264]](O7R[15]);', 'O7R[5][O7R[956]][O7R[8][288]]=O7R[72][O7R[8][264]](O7R[15]);' + THE_THING);
-	newStr=newStr.replace('this[O5p[7][1570]][O5p[7][477]](2 * this[O5p[7][1511]],0xcccccc,0.5);', MODIFIED_GRAPPLE);
-	newStr=newStr.replace('P1R[43][P1R[7][551]][S9L.W1E(62)]={lobbyName:S9L.C1E(2070),gameStartName:S9L.W1E(2070),lobbyDescription:S9L.W1E(2071),tutorialTitle:S9L.C1E(2072),tutorialText:S9L.C1E(2073),forceTeams:false,forceTeamCount:null,editorCanTarget:false};', MODE_INFO);
-	
-	newStr=newStr.replaceAll('O7R[0][4][O7R[8][118]] == "sp"', '(O7R[0][4][O7R[8][118]] == "sp" || O7R[0][4][O7R[8][118]] == "dsp")');
-	newStr=newStr.replace('this[t1C[149]][t1C[118]] == "sp"', 'this[t1C[149]][t1C[118]] == "sp" || this[t1C[149]][t1C[118]] == "dsp"');
-	newStr=newStr.replaceAll('B1V[0][3][B1V[3][118]] == S9L.C1E(1132)', '(B1V[0][3][B1V[3][118]] == S9L.C1E(1132) || B1V[0][3][B1V[3][118]] == "dsp")');
-	newStr=newStr.replace('this[S5p[4][149]][S5p[4][118]] == S9L.C1E(1132)', '(this[S5p[4][149]][S5p[4][118]] == S9L.C1E(1132) || this[S5p[4][149]][S5p[4][118]] == "dsp")')
-	
-	newStr=newStr.replace('this[t1C[1588]](f0M,w0M,t0M,K2M);', 'this[t1C[1588]](f0M,w0M,t0M,K2M,this[t1C[149]][t1C[118]]);')
-	newStr=newStr.replace('doGrapple(I6i,U6i,R6i,z6i)', 'doGrapple(I6i,U6i,R6i,z6i,mode)');
-	if(str === newStr) throw "Injection failed!";
-	console.log("Death Grapple injector run");
-	return newStr;
-}
 
-const MODIFIED_GRAPPLE=`
+MODIFIED_GRAPPLE=`
 if(mode == "sp") {
 	this[O5p[7][1570]][O5p[7][477]](2 * this[O5p[7][1511]],0xcccccc,0.5);
 }
 else {
-	let color;
+	var color;
 	switch(O5p[0][0][O5p[7][41]][this[O5p[7][1105]]].team) {
 		case 2:
 			color = 0xff0000;
@@ -44,12 +27,12 @@ else {
 }
 `;
 
-const THE_THING=`
+THE_THING=`
 if(j6V.mo == "dsp") {
-	const getDistance = (p1, p2) => {
+	let getDistance = (p1, p2) => {
 		return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
 	}
-	const distToSegmentSquared = (circleCenter, circleRadius, segmentStart, segmentEnd) => {
+	let distToSegmentSquared = (circleCenter, circleRadius, segmentStart, segmentEnd) => {
 		/*https://web.archive.org/web/20211104230620/https://www.emanueleferonato.com/2018/08/06/pure-mathematics-line-segment-vs-circle-collision-detection-along-with-html5-example/*/
 		let l2 = getDistance(segmentStart, segmentEnd);
 		let t = ((circleCenter.x - segmentStart.x) * (segmentEnd.x - segmentStart.x) + (circleCenter.y - segmentStart.y) * (segmentEnd.y - segmentStart.y)) / l2;
@@ -74,24 +57,15 @@ if(j6V.mo == "dsp") {
 }
 }`;
 
-const END_GAME=`
+END_GAME=`
 function w8I() {
 	if(j0V[94]["hostID"] == j0V[94]["getLSID"]()) {
 		j0V[94]["sendReturnToLobby"]();
 	}
 `;
 
-const MODE_INFO=`
-P1R[43][P1R[7][551]][S9L.W1E(62)]={
-	lobbyName:S9L.C1E(2070),
-	gameStartName:S9L.W1E(2070),
-	lobbyDescription:S9L.W1E(2071),
-	tutorialTitle:S9L.C1E(2072),
-	tutorialText:S9L.C1E(2073),
-	forceTeams:false,
-	forceTeamCount:null,
-	editorCanTarget:true
-};
+MODE_INFO=`
+P1R[43][P1R[7][551]][S9L.C1E(1131)]={lobbyName:S9L.W1E(2083),gameStartName:S9L.C1E(2084),lobbyDescription:S9L.C1E(2085),tutorialTitle:S9L.W1E(2086),tutorialText:S9L.C1E(2087),forceTeams:false,forceTeamCount:null,editorCanTarget:true};
 P1R[43][P1R[7][551]]["dsp"]={
 	lobbyName:"Death Grapple",
 	gameStartName:"DEATH GRAPPLE",
@@ -103,7 +77,23 @@ P1R[43][P1R[7][551]]["dsp"]={
 	editorCanTarget:false
 };`
 
-const DEATH_GRAPPLE_MODE=`[S9L.C1E(107),S9L.W1E(1130),S9L.C1E(1131),S9L.W1E(1132),"dsp",` //Adds death grapple to mode selection button
+	newStr = str;
+	newStr=newStr.replace('S9L.W1E(116)];','"dsp",S9L.W1E(116)];');
+	newStr=newStr.replace('O7R[5][O7R[956]][O7R[8][288]]=O7R[72][O7R[8][264]](O7R[15]);', 'O7R[5][O7R[956]][O7R[8][288]]=O7R[72][O7R[8][264]](O7R[15]);' + THE_THING);
+	newStr=newStr.replace('this[O5p[7][1570]][O5p[7][477]](2 * this[O5p[7][1511]],0xcccccc,0.5);', MODIFIED_GRAPPLE);
+	newStr=newStr.replace('P1R[43][P1R[7][551]][S9L.C1E(1131)]={lobbyName:S9L.W1E(2083),gameStartName:S9L.C1E(2084),lobbyDescription:S9L.C1E(2085),tutorialTitle:S9L.W1E(2086),tutorialText:S9L.C1E(2087),forceTeams:false,forceTeamCount:null,editorCanTarget:true};', MODE_INFO);
+	
+	newStr=newStr.replaceAll('O7R[0][4][O7R[8][118]] == "sp"', '(O7R[0][4][O7R[8][118]] == "sp" || O7R[0][4][O7R[8][118]] == "dsp")');
+	newStr=newStr.replace('this[t1C[149]][t1C[118]] == "sp"', 'this[t1C[149]][t1C[118]] == "sp" || this[t1C[149]][t1C[118]] == "dsp"');
+	newStr=newStr.replaceAll('B1V[0][3][B1V[3][118]] == S9L.C1E(1132)', '(B1V[0][3][B1V[3][118]] == S9L.C1E(1132) || B1V[0][3][B1V[3][118]] == "dsp")');
+	newStr=newStr.replace('this[S5p[4][149]][S5p[4][118]] == S9L.C1E(1132)', '(this[S5p[4][149]][S5p[4][118]] == S9L.C1E(1132) || this[S5p[4][149]][S5p[4][118]] == "dsp")')
+	
+	newStr=newStr.replace('this[t1C[1588]](f0M,w0M,t0M,K2M);', 'this[t1C[1588]](f0M,w0M,t0M,K2M,this[t1C[149]][t1C[118]]);')
+	newStr=newStr.replace('doGrapple(I6i,U6i,R6i,z6i)', 'doGrapple(I6i,U6i,R6i,z6i,mode)');
+	if(str === newStr) throw "Injection failed!";
+	console.log("Death Grapple injector run");
+	return newStr;
+}
 
 if(!window.bonkCodeInjectors)
 window.bonkCodeInjectors = [];
