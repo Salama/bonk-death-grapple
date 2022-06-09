@@ -1,10 +1,12 @@
 let MODIFIED_GRAPPLE=`
-if(mode == "sp") {
-	this[O5p[7][1570]][O5p[7][477]](2 * this[O5p[7][1511]],0xcccccc,0.5);
+if(this.gameSettings.mo == "sp") {
+	this[m1k[9][1571]][m1k[9][477]](2 * this[m1k[9][1512]],0xcccccc,0.5);
 }
 else {
 	var color;
-	switch(O5p[0][0][O5p[7][41]][this[O5p[7][1105]]].team) {
+	//var cooldown = 0xcccccc * (m1k[0][0].discs[this.playerID].a1a == Math.floor(m1k[0][0].discs[this.playerID].a1a) ? 0 : 1);
+	var cooldown = 0xcccccc * (m1k[0][0].discs[this.playerID].a1a == Math.floor(m1k[0][0].discs[this.playerID].a1a) ? 0 : 1);
+	switch(m1k[0][0].discs[this.playerID].team) {
 		case 2:
 			color = 0xff0000;
 			break;
@@ -21,12 +23,12 @@ else {
 			color = 0x000000;
 			break;
 	}
-	this[O5p[7][1570]][O5p[7][477]](2 * this[O5p[7][1511]],color,1);
+	this.specialGraphic.lineStyle(2 * this.scaleRatio,color|cooldown,1);
 }
 `;
 
 let THE_THING=`
-if(j6V.mo == "dsp") {
+if(T7k[0][4].mo == "dsp") {
 	let getDistance = (p1, p2) => {
 		return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
 	}
@@ -47,23 +49,46 @@ if(j6V.mo == "dsp") {
 		return getDistance(circleCenter, tPoint) < circleRadius * circleRadius;
 	}
 
-	for (let player of O7R[0][0].discs) {
-		if(player == O7R[0][0].discs[O7R[956]] || player == undefined || (player.team > 1 && player.team == O7R[0][0].discs[O7R[956]].team )) continue;
-		if(distToSegmentSquared(player, 1, O7R[0][0].discs[O7R[956]], O7R[294])) {
-			O7R[5][O7R[0][0].discs.indexOf(player)].diedThisStep = 1;	
+	for (let player of T7k[0][0].discs) {
+		if(player == T7k[0][0].discs[T7k[653]] || player == undefined || (player.team > 1 && player.team == T7k[0][0].discs[T7k[653]].team) || T7k[0][0].discs[T7k[653]].a1a != Math.floor(T7k[0][0].discs[T7k[653]].a1a)) continue;
+		if(distToSegmentSquared(player, 1, T7k[0][0].discs[T7k[653]], T7k[775])) {
+			E.globalStepVars.discs[T7k[0][0].discs.indexOf(player)].diedThisStep = 1;	
 		}
 }
 }`;
 
 let MODE_INFO=`
-P1R[43][P1R[7][551]][S9L.C1E(1131)]={lobbyName:S9L.W1E(2083),gameStartName:S9L.C1E(2084),lobbyDescription:S9L.C1E(2085),tutorialTitle:S9L.W1E(2086),tutorialText:S9L.C1E(2087),forceTeams:false,forceTeamCount:null,editorCanTarget:true};
-P1R[43][P1R[7][551]]["dsp"]={
+editorCanTarget:true};
+v2k[10][v2k[7][551]]["dsp"]={
 	lobbyName:"Death Grapple",
 	gameStartName:"DEATH GRAPPLE",
-	lobbyDescription:"You have rockets on either side of your player.\\nUse the up key to engage both jets, or left/right to only engage one.\\nHold Z to give your rockets a temporary boost.",
-	tutorialTitle:S9L.C1E(2072),
-	tutorialText:S9L.C1E(2073),
+	lobbyDescription:"Grapple mode, but grapples kill\\nenemy players on impact.",
+	tutorialTitle:"",
+	tutorialText:"",
 	forceTeams:false,
 	forceTeamCount:null,
 	editorCanTarget:false
 };`;
+
+let DEATH_GRAPPLE_A1A=`
+if(T7k[0][4].mo == "dsp" && T7k[0][0].ftu == -1) {
+	if(T7k[4][T7k[653]].a1a - Math.floor(T7k[4][T7k[653]].a1a) > 1 - 0.10) T7k[4][T7k[653]].a1a -= 0.001;
+	else T7k[4][T7k[653]].a1a = Math.floor(T7k[4][T7k[653]].a1a);
+	if(T7k[4][T7k[653]].swing) {
+		T7k[4][T7k[653]].a1a -= 4;
+		if(T7k[4][T7k[653]].a1a < 0) {
+			T7k[4][T7k[653]].a1a=0;
+		}
+		if(T7k[4][T7k[653]].a1a < 500) {
+			T7k[4][T7k[653]].a1a=0;
+			T7k[4][T7k[653]].swing=false;
+		}
+	}
+	else {
+		T7k[4][T7k[653]].a1a += 3;
+		if(T7k[4][T7k[653]].a1a > 1000) {
+			T7k[4][T7k[653]].a1a=1000 + (T7k[4][T7k[653]].a1a - Math.floor(T7k[4][T7k[653]].a1a));
+		}
+	}
+} else if(T7k[0][4].mo == "dsp") {T7k[4][T7k[653]].a1a = 1000.999;}
+`;

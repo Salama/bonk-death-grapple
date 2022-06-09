@@ -1,8 +1,9 @@
 #!/bin/bash
 name="Death Grapple"
 sname="bonk-death-grapple"
-version="1.4"
+version="2.0"
 description="Adds a new mode called Death Grapple"
+
 tmp0=$(mktemp)
 
 if [ ! -d build ]; then mkdir build; fi

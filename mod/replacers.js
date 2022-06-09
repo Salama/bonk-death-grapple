@@ -1,12 +1,23 @@
-newStr=newStr.replace('S9L.W1E(116)];','"dsp",S9L.W1E(116)];');
-newStr=newStr.replace('O7R[5][O7R[956]][O7R[8][288]]=O7R[72][O7R[8][264]](O7R[15]);', 'O7R[5][O7R[956]][O7R[8][288]]=O7R[72][O7R[8][264]](O7R[15]);' + THE_THING);
-newStr=newStr.replace('this[O5p[7][1570]][O5p[7][477]](2 * this[O5p[7][1511]],0xcccccc,0.5);', MODIFIED_GRAPPLE);
-newStr=newStr.replace('P1R[43][P1R[7][551]][S9L.C1E(1131)]={lobbyName:S9L.W1E(2083),gameStartName:S9L.C1E(2084),lobbyDescription:S9L.C1E(2085),tutorialTitle:S9L.W1E(2086),tutorialText:S9L.C1E(2087),forceTeams:false,forceTeamCount:null,editorCanTarget:true};', MODE_INFO);
+let lobbyModes=newStr.match(/...\....\((\d){1,4}\)\];...\[(\d){1,3}\](.){0,20}\[\];/)[0];
+newStr=newStr.replace(lobbyModes,"'dsp'," + lobbyModes);
 
-newStr=newStr.replaceAll('O7R[0][4][O7R[8][118]] == "sp"', '(O7R[0][4][O7R[8][118]] == "sp" || O7R[0][4][O7R[8][118]] == "dsp")');
-newStr=newStr.replace('this[t1C[149]][t1C[118]] == "sp"', 'this[t1C[149]][t1C[118]] == "sp" || this[t1C[149]][t1C[118]] == "dsp"');
-newStr=newStr.replaceAll('B1V[0][3][B1V[3][118]] == S9L.C1E(1132)', '(B1V[0][3][B1V[3][118]] == S9L.C1E(1132) || B1V[0][3][B1V[3][118]] == "dsp")');
-newStr=newStr.replace('this[S5p[4][149]][S5p[4][118]] == S9L.C1E(1132)', '(this[S5p[4][149]][S5p[4][118]] == S9L.C1E(1132) || this[S5p[4][149]][S5p[4][118]] == "dsp")');
+newStr=newStr.replace('T7k[4][T7k[653]][T7k[2][288]]=T7k[62][T7k[2][264]](T7k[34]);', 'T7k[4][T7k[653]][T7k[2][288]]=T7k[62][T7k[2][264]](T7k[34]);' + THE_THING);
+newStr=newStr.replace('editorCanTarget:true};', MODE_INFO);
 
-newStr=newStr.replace('this[t1C[1588]](f0M,w0M,t0M,K2M);', 'this[t1C[1588]](f0M,w0M,t0M,K2M,this[t1C[149]][t1C[118]]);');
-newStr=newStr.replace('doGrapple(I6i,U6i,R6i,z6i)', 'doGrapple(I6i,U6i,R6i,z6i,mode)');
+newStr=newStr.replace('doGrapple(A9Q,x9Q,y9Q,b9Q);', 'doGrapple(A9Q,x9Q,y9Q,b9Q,mode);');
+
+
+newStr=newStr.replace('this[m1k[9][1571]][m1k[9][477]](2 * this[m1k[9][1512]],0xcccccc,0.5);', MODIFIED_GRAPPLE);
+newStr=newStr.replaceAll('T7k[0][4][T7k[2][118]] == "sp"', '(T7k[0][4][T7k[2][118]] == "sp" || T7k[0][4][T7k[2][118]] == "dsp")');
+newStr=newStr.replace('if(T7k[0][4][T7k[2][118]] == "sp"', 'if((T7k[0][4][T7k[2][118]] == "sp" || T7k[0][4][T7k[2][118]] == "dsp")');
+newStr=newStr.replace('this[G0M[149]][G0M[118]] == "sp"', '(this[G0M[149]][G0M[118]] == "sp" || this[G0M[149]][G0M[118]] == "dsp")');
+newStr=newStr.replace('r6H[0][3][r6H[2][118]] != G9b.z43(1188)', '(r6H[0][3][r6H[2][118]] != G9b.z43(1188) || r6H[0][3][r6H[2][118]] == "dsp")');
+newStr=newStr.replace('this[G0M[149]][G0M[118]] == "sp"', '(this[G0M[149]][G0M[118]] == "sp" || this[G0M[149]][G0M[118]] == "dsp")');
+newStr=newStr.replace('this[o1k[7][149]][o1k[7][118]] == G9b.A43(1133)', 'this[o1k[7][149]][o1k[7][118]] == G9b.A43(1133) || this[o1k[7][149]][o1k[7][118]] == "dsp"');
+
+newStr=newStr.replace('this[G0M[1589]](A9Q,x9Q,y9Q,b9Q);', 'this[G0M[1589]](A9Q,x9Q,y9Q,b9Q,this[G0M[149]][G0M[118]]);');
+
+//Cooldown. REMEMBER TO KEEP BELOW if(T7k[0][4][T7k[2][118]] == "sp"){ REPLACEMENT
+newStr=newStr.replace('if((T7k[0][4][T7k[2][118]] == "sp" || T7k[0][4][T7k[2][118]] == "dsp"))', 'if(T7k[0][4][T7k[2][118]] == "sp")');
+newStr=newStr.replace('T7k[13]=T7k[59];', DEATH_GRAPPLE_A1A+'T7k[13]=T7k[59];');
+//newStr=newStr.replace('=500;;}', '=500;;}if(k7k[0][5][k7k[4][118]] == "dsp"){k7k[1].discs[k7k[35][k7k[47]].id].a1a=1000.999;;}');
