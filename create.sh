@@ -1,7 +1,7 @@
 #!/bin/bash
 name="Death Grapple"
 sname="bonk-death-grapple"
-version="2.0"
+version="2.3"
 description="Adds a new mode called Death Grapple"
 
 tmp0=$(mktemp)

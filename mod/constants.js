@@ -1,8 +1,5 @@
 let MODIFIED_GRAPPLE=`
-if(this.gameSettings.mo == "sp") {
-	this[m1k[9][1571]][m1k[9][477]](2 * this[m1k[9][1512]],0xcccccc,0.5);
-}
-else {
+if(this.gameSettings.mo == "dsp") {
 	var color;
 	//var cooldown = 0xcccccc * (m1k[0][0].discs[this.playerID].a1a == Math.floor(m1k[0][0].discs[this.playerID].a1a) ? 0 : 1);
 	var cooldown = 0xcccccc * (m1k[0][0].discs[this.playerID].a1a == Math.floor(m1k[0][0].discs[this.playerID].a1a) ? 0 : 1);
@@ -11,22 +8,25 @@ else {
 			color = 0xff0000;
 			break;
 			case 3:
-			color = 0x0000ff;
-			break;
-			case 4:
-			color = 0x00ff00;
-			break;
-			case 5:
-			color = 0xffff00;
+				color = 0x0000ff;
+				break;
+				case 4:
+					color = 0x00ff00;
+					break;
+					case 5:
+						color = 0xffff00;
 			break;
 		default:
 			color = 0x000000;
 			break;
-	}
-	this.specialGraphic.lineStyle(2 * this.scaleRatio,color|cooldown,1);
+		}
+		this.specialGraphic.lineStyle(2 * this.scaleRatio,color|cooldown,1);
+}
+else {
+	this[m1k[9][1571]][m1k[9][477]](2 * this[m1k[9][1512]],0xcccccc,0.5);
 }
 `;
-
+	
 let THE_THING=`
 if(T7k[0][4].mo == "dsp") {
 	let getDistance = (p1, p2) => {
@@ -51,7 +51,7 @@ if(T7k[0][4].mo == "dsp") {
 
 	for (let player of T7k[0][0].discs) {
 		if(player == T7k[0][0].discs[T7k[653]] || player == undefined || (player.team > 1 && player.team == T7k[0][0].discs[T7k[653]].team) || T7k[0][0].discs[T7k[653]].a1a != Math.floor(T7k[0][0].discs[T7k[653]].a1a)) continue;
-		if(distToSegmentSquared(player, 1, T7k[0][0].discs[T7k[653]], T7k[775])) {
+		if(distToSegmentSquared(player, T7k[4][T7k[0][0].discs.indexOf(player)].radius, T7k[0][0].discs[T7k[653]], T7k[775])) {
 			E.globalStepVars.discs[T7k[0][0].discs.indexOf(player)].diedThisStep = 1;	
 		}
 }

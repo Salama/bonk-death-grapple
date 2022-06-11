@@ -18,6 +18,6 @@ newStr=newStr.replace('this[o1k[7][149]][o1k[7][118]] == G9b.A43(1133)', 'this[o
 newStr=newStr.replace('this[G0M[1589]](A9Q,x9Q,y9Q,b9Q);', 'this[G0M[1589]](A9Q,x9Q,y9Q,b9Q,this[G0M[149]][G0M[118]]);');
 
 //Cooldown. REMEMBER TO KEEP BELOW if(T7k[0][4][T7k[2][118]] == "sp"){ REPLACEMENT
-newStr=newStr.replace('if((T7k[0][4][T7k[2][118]] == "sp" || T7k[0][4][T7k[2][118]] == "dsp"))', 'if(T7k[0][4][T7k[2][118]] == "sp")');
+newStr=newStr.replace('(T7k[0][4][T7k[2][118]] == "sp" || T7k[0][4][T7k[2][118]] == "dsp"))', 'T7k[0][4][T7k[2][118]] == "sp")');
 newStr=newStr.replace('T7k[13]=T7k[59];', DEATH_GRAPPLE_A1A+'T7k[13]=T7k[59];');
 //newStr=newStr.replace('=500;;}', '=500;;}if(k7k[0][5][k7k[4][118]] == "dsp"){k7k[1].discs[k7k[35][k7k[47]].id].a1a=1000.999;;}');
